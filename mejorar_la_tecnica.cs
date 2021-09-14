@@ -11,16 +11,11 @@ using System.Windows.Forms;
 namespace USUARIO
 {  
     public partial class ASIGNACIONCREDENCIALES : Form
-    {
-
-
+    {   
         //--------------------------------------------------------------------------------------------------------
-        //-------------------------------START FUNCIONES FUNCIONES START----------------------------------------------
+        //-------------------------------START FUNCIONES FUNCIONES START------------------------------------------
         //--------------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------------
-
-
-
         bool editar = false;
         string tabla = "asignacion_credenciales";
         string dato00 = ""; string campo00 = "codigo";
@@ -38,26 +33,15 @@ namespace USUARIO
         string dato12 = ""; string campo12 = "";
         string dato13 = ""; string campo13 = "";
         string dato14 = ""; string campo14 = "";
-        
-        
-
-        private void cargar_modulo()
+        private void setear_controles()
         {
-            tools.conectar();
-            llenar_datagrid(dataGridView1);
+            txtdepartamento.Text = dato01;
+            txtcedularegistrousuario.Text = dato02;
+            txtnombreregistrousuario.Text = dato03;
+            txtcorreoempregistrousuario.Text = dato04;
+            txtusuarioregistrousuario.Text = dato05;
+            txtcontraseñaregistrousuario.Text = dato06;
         }
-
-        private void llenar_datagrid(DataGridView datagrid)
-        {
-            datagrid.DataSource = tools.obtenerDatosTabla("select * from "+tabla);
-        }
-
-        private void llenar_datagrid(DataTable datos)
-        {
-            dataGridView1.DataSource = datos;
-            limpiar();
-        }
-
         private void setear_variables()
         {
             dato01 = txtdepartamento.Text;
@@ -65,8 +49,8 @@ namespace USUARIO
             dato03 = txtnombreregistrousuario.Text;
             dato04 = txtcorreoempregistrousuario.Text;
             dato05 = txtusuarioregistrousuario.Text;
-            dato06 = txtcontraseñaregistrousuario.Text;           
-        }
+            dato06 = txtcontraseñaregistrousuario.Text;
+        }  
 
         private string instrucciones_update(DataGridView datagridview)
         {
@@ -104,17 +88,6 @@ namespace USUARIO
             return instrucciones;           
         }
 
-        private void setear_controles()
-        {
-            txtdepartamento.Text = dato01;
-            txtcedularegistrousuario.Text = dato02;
-            txtnombreregistrousuario.Text = dato03;
-            txtcorreoempregistrousuario.Text = dato04;
-            txtusuarioregistrousuario.Text = dato05;
-            txtcontraseñaregistrousuario.Text = dato06;
-        }
-
-
         private void cargar_datos_en_controles(DataGridView datagrid)
         {
             editar = true;
@@ -122,25 +95,16 @@ namespace USUARIO
             {
                 dato00 = datagrid.CurrentRow.Cells[0].Value.ToString();
                 label3.Text = dato00;
-
                 dato01 = tools.unDatoToString("select " + campo01 + " from " + tabla + " where " + campo00 + " = " + dato00 + "");
                 dato02 = tools.unDatoToString("select " + campo02 + " from " + tabla + " where " + campo00 + " = " + dato00 + "");
                 dato03 = tools.unDatoToString("select " + campo03 + " from " + tabla + " where " + campo00 + " = " + dato00 + "");
                 dato04 = tools.unDatoToString("select " + campo04 + " from " + tabla + " where " + campo00 + " = " + dato00 + "");
                 dato05 = tools.unDatoToString("select " + campo05 + " from " + tabla + " where " + campo00 + " = " + dato00 + "");
                 dato06 = tools.unDatoToString("select " + campo06 + " from " + tabla + " where " + campo00 + " = " + dato00 + "");
-
                 setear_controles();
             }
 
         }
-
-
-        private void eliminar_registro(DataGridView datagrid)
-        {
-            llenar_datagrid(tools.eliminar_registro(datagrid, tabla, campo00));
-        }
-
 
         private void limpiar()
         {
@@ -156,6 +120,27 @@ namespace USUARIO
         }
 
 
+
+
+
+        private void cargar_modulo()
+        {
+            tools.conectar();
+            llenar_datagrid(dataGridView1);
+        }
+        private void llenar_datagrid(DataGridView datagrid)
+        {
+            datagrid.DataSource = tools.obtenerDatosTabla("select * from " + tabla);
+        }
+        private void llenar_datagrid(DataTable datos)
+        {
+            dataGridView1.DataSource = datos;
+            limpiar();
+        }
+        private void eliminar_registro(DataGridView datagrid)
+        {
+            llenar_datagrid(tools.eliminar_registro(datagrid, tabla, campo00));
+        }
         private void seleccionar_id_del_registro(DataGridView datagrid)
         {
             if (datagrid.Rows.Count > 0)
@@ -163,7 +148,6 @@ namespace USUARIO
                 dato00 = datagrid.CurrentRow.Cells[0].Value.ToString();
             }
         }
-
         private void guardar_o_actualizar()
         {
             if (editar == true)
@@ -175,9 +159,6 @@ namespace USUARIO
                 llenar_datagrid(tools.guardar_registro(dataGridView1, tabla, instrucciones_save_insert()));
             }
         }
-
-
-
         //--------------------------------------------------------------------------------------------------------
         //-------------------------------END FUNCIONES FUNCIONES END----------------------------------------------
         //-----------------------------------por fin jejeje -------------------------------------------------------
