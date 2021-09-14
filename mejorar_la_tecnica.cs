@@ -88,12 +88,12 @@ namespace USUARIO
             return instrucciones;           
         }
 
-        private void cargar_datos_en_controles(DataGridView datagrid)
+        private void cargar_datos_en_controles()
         {
             editar = true;
-            if (datagrid.Rows.Count > 0)
+            if (dataGridView1.Rows.Count > 0)
             {
-                dato00 = datagrid.CurrentRow.Cells[0].Value.ToString();
+                dato00 = dataGridView1.CurrentRow.Cells[0].Value.ToString();
                 label3.Text = dato00;
                 dato01 = tools.unDatoToString("select " + campo01 + " from " + tabla + " where " + campo00 + " = " + dato00 + "");
                 dato02 = tools.unDatoToString("select " + campo02 + " from " + tabla + " where " + campo00 + " = " + dato00 + "");
@@ -137,15 +137,15 @@ namespace USUARIO
             dataGridView1.DataSource = datos;
             limpiar();
         }
-        private void eliminar_registro(DataGridView datagrid)
+        private void eliminar_registro()
         {
-            llenar_datagrid(tools.eliminar_registro(datagrid, tabla, campo00));
+            llenar_datagrid(tools.eliminar_registro(dataGridView1, tabla, campo00));
         }
-        private void seleccionar_id_del_registro(DataGridView datagrid)
+        private void seleccionar_id_del_registro()
         {
-            if (datagrid.Rows.Count > 0)
+            if (dataGridView1.Rows.Count > 0)
             {
-                dato00 = datagrid.CurrentRow.Cells[0].Value.ToString();
+                dato00 = dataGridView1.CurrentRow.Cells[0].Value.ToString();
             }
         }
         private void guardar_o_actualizar()
@@ -184,21 +184,21 @@ namespace USUARIO
 
         private void dgvasigancioncredenciales_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            seleccionar_id_del_registro(dataGridView1);
+            seleccionar_id_del_registro();
         }
 
  
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            cargar_datos_en_controles(dataGridView1);
+            cargar_datos_en_controles();
         }
 
         
 
         private void buttcancelarasignacreden_Click(object sender, EventArgs e)
         {
-            eliminar_registro(dataGridView1);
+            eliminar_registro();
         }
 
        
