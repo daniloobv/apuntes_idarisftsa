@@ -1,3 +1,18 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace USUARIO
+{  
+    public partial class ASIGNACIONCREDENCIALES : Form
+    {
+
 
         //--------------------------------------------------------------------------------------------------------
         //-------------------------------START FUNCIONES FUNCIONES START----------------------------------------------
@@ -41,17 +56,22 @@
         {
             dataGridView1.DataSource = datos;
             limpiar();
-        }      
+        }
 
-        private string instrucciones_update(DataGridView datagridview)
+        private void setear_variables()
         {
-            dato00 = datagridview.CurrentRow.Cells[0].Value.ToString();
             dato01 = txtdepartamento.Text;
             dato02 = txtcedularegistrousuario.Text;
             dato03 = txtnombreregistrousuario.Text;
             dato04 = txtcorreoempregistrousuario.Text;
             dato05 = txtusuarioregistrousuario.Text;
-            dato06 = txtcontraseñaregistrousuario.Text;
+            dato06 = txtcontraseñaregistrousuario.Text;           
+        }
+
+        private string instrucciones_update(DataGridView datagridview)
+        {
+            dato00 = datagridview.CurrentRow.Cells[0].Value.ToString();
+            setear_variables();
             string instrucciones = "update " + tabla + " set " +
             campo01 + " = '" + dato01 + "', " +
             campo02 + " = '" + dato02 + "', " +
@@ -64,14 +84,8 @@
         }
 
         private string instrucciones_save_insert()
-        {           
-            dato01 = txtdepartamento.Text;
-            dato02 = txtcedularegistrousuario.Text;
-            dato03 = txtnombreregistrousuario.Text;
-            dato04 = txtcorreoempregistrousuario.Text;
-            dato05 = txtusuarioregistrousuario.Text;
-            dato06 = txtcontraseñaregistrousuario.Text;
-
+        {
+            setear_variables();
             string instrucciones = "insert into "+
                 tabla + "(" +
                 campo01 + "," +
@@ -87,7 +101,6 @@
                 dato04 + "','" +
                 dato05 + "','" +
                 dato06 + "') ";
-
             return instrucciones;           
         }
 
@@ -167,6 +180,56 @@
 
         //--------------------------------------------------------------------------------------------------------
         //-------------------------------END FUNCIONES FUNCIONES END----------------------------------------------
-        //-----------------------------------por fin jejeje ------------------------------------------------------
+        //-----------------------------------por fin jejeje -------------------------------------------------------
         //--------------------------------------------------------------------------------------------------------
 
+
+
+        public ASIGNACIONCREDENCIALES()
+        {
+            InitializeComponent();
+        }
+        private void REGISTRODEUSUARIO_Load(object sender, EventArgs e)
+        {
+            cargar_modulo();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            guardar_o_actualizar();
+        }
+        
+              
+
+        private void dgvasigancioncredenciales_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            seleccionar_id_del_registro(dataGridView1);
+        }
+
+ 
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            cargar_datos_en_controles(dataGridView1);
+        }
+
+        
+
+        private void buttcancelarasignacreden_Click(object sender, EventArgs e)
+        {
+            eliminar_registro(dataGridView1);
+        }
+
+       
+
+        private void button3_Click(object sender, EventArgs e)
+        {            
+            limpiar();
+        }
+           
+
+
+
+    }
+
+}
