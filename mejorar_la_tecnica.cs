@@ -104,6 +104,16 @@ namespace USUARIO
             return instrucciones;           
         }
 
+        private void setear_controles()
+        {
+            txtdepartamento.Text = dato01;
+            txtcedularegistrousuario.Text = dato02;
+            txtnombreregistrousuario.Text = dato03;
+            txtcorreoempregistrousuario.Text = dato04;
+            txtusuarioregistrousuario.Text = dato05;
+            txtcontraseñaregistrousuario.Text = dato06;
+        }
+
 
         private void cargar_datos_en_controles(DataGridView datagrid)
         {
@@ -120,12 +130,7 @@ namespace USUARIO
                 dato05 = tools.unDatoToString("select " + campo05 + " from " + tabla + " where " + campo00 + " = " + dato00 + "");
                 dato06 = tools.unDatoToString("select " + campo06 + " from " + tabla + " where " + campo00 + " = " + dato00 + "");
 
-                txtdepartamento.Text = dato01;
-                txtcedularegistrousuario.Text = dato02;
-                txtnombreregistrousuario.Text = dato03;
-                txtcorreoempregistrousuario.Text = dato04;
-                txtusuarioregistrousuario.Text = dato05;
-                txtcontraseñaregistrousuario.Text = dato06;
+                setear_controles();
             }
 
         }
@@ -145,12 +150,7 @@ namespace USUARIO
             dato04 = "";
             dato05 = "";
             dato06 = "";
-            txtdepartamento.Text = dato01;
-            txtcedularegistrousuario.Text = dato02;
-            txtnombreregistrousuario.Text = dato03;
-            txtcorreoempregistrousuario.Text = dato04;
-            txtusuarioregistrousuario.Text = dato05;
-            txtcontraseñaregistrousuario.Text = dato06;
+            setear_controles();
             label3.Text = "";
             editar = false;
         }
